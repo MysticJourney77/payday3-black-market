@@ -150,6 +150,5 @@ elif choice == 3:
                 data["price"] = 1000
                 data["discountedPrice"] = 1000
                 data["currencyCode"] = "CASH"
-                print(f"item_id= {item_id}")
+                print(f"Item Purchased = {item_id}")
             response = requests.post(url, json=data, headers=headers)
-            print(response)
