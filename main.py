@@ -2,6 +2,7 @@ import requests
 import json
 import secrets
 import string
+import os
 
 
 url_token = f"https://nebula.starbreeze.com/iam/v3/oauth/token"
@@ -30,8 +31,7 @@ data_token = {
     "extend_exp": "true"
 }
 
-
-print("Login to Nebula")
+print("Login to Nebula Account")
 
 username_request = input("Enter your EmailID: ")
 password_request = input("Enter the Password: ")
@@ -57,18 +57,21 @@ with open("response.json", "w") as json_file:
 print("Option - 1 : Buy C-Stacks")
 print("Option - 2 : Custom Buy")
 print("Option - 3 : Heist Favors")
+print("Option - 4 : Import Customized Save Game")
 
 options = {
     1: "Option - 1 : Buy C-Stacks",
     2: "Option - 2 : Custom Buy",
     3: "Option - 3 : Heist Favors",
+    4: "Option - 4 : Modded Save"
 }
 with open("response.json", "r") as config_file:
    config_data = json.load(config_file)
 account_id = config_data.get("user_id", "")
 authorization_token = config_data.get("token", "")
 
-url = f"https://nebula.starbreeze.com/platform/public/namespaces/pd3/users/{account_id}/orders" 
+url = f"https://nebula.starbreeze.com/platform/public/namespaces/pd3/users/{account_id}/orders"
+url_save_data = f"https://nebula.starbreeze.com/cloudsave/v1/namespaces/pd3/users/{account_id}/records/progressionsavegame"
 
 headers = {
     "Accept-Encoding": "deflate, gzip",
@@ -91,6 +94,17 @@ data = {
     "language": "en-US",
     "returnUrl": "http://127.0.0.1"
 }
+
+with open('modded_save_data.json', 'r') as json_file:
+    request_headers_data = json.load(json_file)
+sava_data_profile = request_headers_data
+
+def delete_file(file_path):
+    if os.path.exists(file_path):
+        os.remove(file_path)
+    else:
+        print(f"The file '{file_path}' does not exist.")
+
 def get_valid_currencycode():
 
     while True:
@@ -118,7 +132,8 @@ if choice == 1:
         data["discountedPrice"] = 90000
         data["currencyCode"] = "CASH"
         response = requests.post(url, json=data, headers=headers)
-        print(f"C-Stacks Bought successfully - {_ + 1}")  
+        print(f"C-Stacks Bought successfully - {_ + 1}")
+        delete_file("response.json")  
 
 elif choice == 2:
         item_id_custom = input("Enter itemID: ")
@@ -132,6 +147,7 @@ elif choice == 2:
         for _ in range(repeat_request):
             response = requests.post(url, json=data, headers=headers)
             print(f"Custom Item Purchased - {_ + 1}")
+        delete_file("response.json") 
 
 elif choice == 3: 
     with open('Payday3_offsets.json', 'r') as json_file:
@@ -150,6 +166,13 @@ elif choice == 3:
                 data["price"] = 1000
                 data["discountedPrice"] = 1000
                 data["currencyCode"] = "CASH"
-                print(f"item_id= {item_id}")
+                print(f"Item Purchased = {item_id}")
             response = requests.post(url, json=data, headers=headers)
-            print(response)
+    delete_file("response.json") 
+
+elif choice == 4:
+    response = requests.post(url_save_data, json=sava_data_profile, headers=headers)
+    #with open('response_save_data.txt', 'w') as text_file:
+        #text_file.write(response.text)
+    print("Modded Save loaded!")
+    delete_file("response.json") 
