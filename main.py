@@ -172,7 +172,7 @@ elif choice == 3:
 
 elif choice == 4:
     response = requests.post(url_save_data, json=sava_data_profile, headers=headers)
-    with open('response_save_data.txt', 'w') as text_file:
-        text_file.write(response.text)
+    #with open('response_save_data.txt', 'w') as text_file:
+        #text_file.write(response.text)
     print("Modded Save loaded!")
     delete_file("response.json") 
