@@ -133,7 +133,7 @@ if choice == 1:
         data["currencyCode"] = "CASH"
         response = requests.post(url, json=data, headers=headers)
         print(f"C-Stacks Bought successfully - {_ + 1}")
-        delete_file("response.json")  
+    delete_file("response.json")  
 
 elif choice == 2:
         item_id_custom = input("Enter itemID: ")
