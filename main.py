@@ -211,9 +211,8 @@ while True:
     except ValueError:
         print("Invalid input. Please enter a valid option.")
 
-repeat_request = int(input("Enter the total number of times you want the request to send: "))  
-
 if choice == 1:
+    repeat_request = int(input("Enter the total number of times you want the request to send: "))  
     for _ in range(repeat_request):
         data["itemId"] = "dd693796e4fb4e438971b65eecf6b4b7"
         data["price"] = 90000
@@ -232,6 +231,7 @@ elif choice == 2:
         data["price"] = price_custom
         data["discountedPrice"] = discounted_custom
         data["currencyCode"] = currency_custom
+        repeat_request = int(input("Enter the total number of times you want the request to send: "))  
         for _ in range(repeat_request):
             response = requests.post(url, json=data, headers=headers)
             print(f"Custom Item Purchased - {_ + 1}")
@@ -240,6 +240,7 @@ elif choice == 2:
 elif choice == 3: 
     with open('Payday3_offsets.json', 'r') as json_file:
         item_id_json = json.load(json_file)
+    repeat_request = int(input("Enter the total number of times you want the request to send: "))  
     for _ in range(repeat_request):
         print(f"Heist Item Purchased - {_ + 1}")
         for item_id in item_id_json["itemId"]:
