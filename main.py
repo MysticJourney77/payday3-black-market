@@ -283,7 +283,7 @@ elif choice == 3:
                 #print(response.content.decode('utf-8'))
             else:
                 print("Invalid selection. Please choose a valid number.")
-        delete_file(response.json) 
+        delete_file("response.json") 
 
 elif choice == 4:
     response = requests.post(url_save_data, json=sava_data_profile, headers=headers)
