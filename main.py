@@ -237,27 +237,53 @@ elif choice == 2:
             print(f"Custom Item Purchased - {_ + 1}")
         delete_file("response.json") 
 
-elif choice == 3: 
+elif choice == 3:
     with open('Payday3_offsets.json', 'r') as json_file:
         item_id_json = json.load(json_file)
-    repeat_request = int(input("Enter the total number of times you want the request to send: "))  
-    for _ in range(repeat_request):
-        print(f"Heist Item Purchased - {_ + 1}")
-        for item_id in item_id_json["itemId"]:
-            if item_id == "65a355215bb8473bbf9d3f2661211899":
-                data["itemId"] = item_id
-                data["price"] = 1999
-                data["discountedPrice"] = 1999
-                data["currencyCode"] = "CASH"
-                print(f"Item Purchased = {item_id}")
-            else:
-                data["itemId"] = item_id
+        all_items = [item for group in item_id_json["groups"] for item in group["items"]]
+
+        counter = 1
+        for group in item_id_json["groups"]:
+            print(f"{group['name']}:")
+            for item in group["items"]:
+                print(f"{counter}. {item['alias']} | {item['itemId']} | 1000")  # You can modify this format as needed
+                counter += 1
+            print()
+        print("Select 0 to buy All")
+        selection = int(input("Enter the number of the item you want to select: "))
+        repeat_request = int(input("Enter the total number of times you want the request to send: "))  
+        for _ in range(repeat_request):
+            if selection == 0:
+                for item in all_items:
+                    if item['itemId'] == "65a355215bb8473bbf9d3f2661211899":
+                        data["itemId"] = item['itemId']
+                        data["price"] = 1999
+                        data["discountedPrice"] = 1999
+                        data["currencyCode"] = "CASH"
+                        print(f"Item Purchased = {item['alias']}")
+                        response = requests.post(url, json=data, headers=headers)
+                        #print(response.content.decode('utf-8'))                                    
+                    else:
+                        data["itemId"] = item['itemId']
+                        data["price"] = 1000
+                        data["discountedPrice"] = 1000
+                        data["currencyCode"] = "CASH"
+                        print(f"Item Purchased = {item['alias']}")
+                        response = requests.post(url, json=data, headers=headers)
+                        #print(response.content.decode('utf-8'))
+            elif 1 <= selection <= len(all_items):
+                selected_item = all_items[selection - 1]
+                print(f"Selected Item ID: {selected_item['itemId']}")
+                data["itemId"] = selected_item['itemId']  # Assign the selected item's ID
                 data["price"] = 1000
                 data["discountedPrice"] = 1000
                 data["currencyCode"] = "CASH"
-                print(f"Item Purchased = {item_id}")
-            response = requests.post(url, json=data, headers=headers)
-    delete_file("response.json") 
+                print(f"Item Purchased = {item['alias']}")
+                response = requests.post(url, json=data, headers=headers)
+                #print(response.content.decode('utf-8'))
+            else:
+                print("Invalid selection. Please choose a valid number.")
+        delete_file(response.json) 
 
 elif choice == 4:
     response = requests.post(url_save_data, json=sava_data_profile, headers=headers)
