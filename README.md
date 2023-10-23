@@ -11,6 +11,10 @@ Steps to use the Payday 3 Black Market:
 
 Steps to use Add Free Inventory:
 
+Video : https://gofile.io/d/hz6Vfe
+
+or
+
 1. Run the code in any environment, such as locally or Use the below "Build on Replit".
 2. Run main.py
 3. Select option - 5 (Inventory)
