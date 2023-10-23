@@ -79,7 +79,7 @@ options = {
     1: "Option - 1 : Buy C-Stacks",
     2: "Option - 2 : Custom Buy",
     3: "Option - 3 : Heist Favors",
-    4: "Option - 4 : Modded Save"
+    4: "Option - 4 : Modded Save",
     5: "Option - 5 : Free Inventory"
 }
 with open("response.json", "r") as config_file:
