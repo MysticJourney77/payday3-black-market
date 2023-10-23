@@ -11,6 +11,21 @@ random_bytes = secrets.token_bytes(16)
 
 random_string = ''.join(secrets.choice(string.hexdigits) for i in range(string_length))
 
+def generate_random_hex_string(string_length):
+    return ''.join(secrets.choice(string.hexdigits) for _ in range(string_length))
+
+def create_data_dictionary():
+    global configSlotEntitlementId
+    global configSlotItemId
+    global weaponInSlotEntitlementId
+    global weaponInSlotAccelByteItemId
+
+    weaponInSlotAccelByteItemId = generate_random_hex_string(string_length)
+    weaponInSlotEntitlementId = generate_random_hex_string(string_length)
+    configSlotEntitlementId = generate_random_hex_string(string_length)
+    configSlotItemId = generate_random_hex_string(string_length)
+    return
+
 token_header = {
         "Host": "nebula.starbreeze.com",
     "Content-Type": "application/x-www-form-urlencoded",
@@ -58,12 +73,14 @@ print("Option - 1 : Buy C-Stacks")
 print("Option - 2 : Custom Buy")
 print("Option - 3 : Heist Favors")
 print("Option - 4 : Import Customized Save Game")
+print("Option - 5 : Free Inventory Slots")
 
 options = {
     1: "Option - 1 : Buy C-Stacks",
     2: "Option - 2 : Custom Buy",
     3: "Option - 3 : Heist Favors",
-    4: "Option - 4 : Modded Save"
+    4: "Option - 4 : Modded Save",
+    5: "Option - 5 : Free Inventory"
 }
 with open("response.json", "r") as config_file:
    config_data = json.load(config_file)
@@ -94,6 +111,77 @@ data = {
     "language": "en-US",
     "returnUrl": "http://127.0.0.1"
 }
+weapon_slot = {
+        "weaponInSlotEntitlementId": None,
+        "weaponInSlotAccelByteItemId": None,
+        "weaponInSlotAccelByteItemSku": "",
+        "weaponInventorySlotType": "Configurable",
+        "weaponConfigInventorySlot": {
+            "equippableConfig": {
+                "equippableData": "None",
+                "modDataMap": {}
+            },
+            "payedWeaponPartAttachmentItemIdArray": []
+        },
+        "weaponPresetConfigInventorySlot": {
+            "weaponPresetConfigData": "None"
+        },
+        "itemInventorySlotAvailability": "Available",
+        "configSlotEntitlementId": None,
+        "configSlotItemId": None
+}
+
+mask_slot = {
+        "maskInSlotEntitlementId": None,
+        "maskInSlotAccelByteItemId": None,
+        "maskInventorySlotType": "Configurable",
+        "maskConfig": {
+            "maskData": "None",
+            "modDataMap": {}
+        },
+        "maskPresetConfig": {
+            "maskPresetData": "None"
+        },
+        "itemInventorySlotAvailability": "Available",
+        "configSlotEntitlementId": None,
+        "configSlotItemId": None
+}
+
+suit_slot = {
+        "suitInSlotEntitlementId": None,
+        "suitInSlotAccelByteItemId": None,
+        "suitInventorySlotType": "Configurable",
+        "suitConfig": {
+            "suitData": "None",
+            "suitBaseData": "None",
+            "modDataMapArray": [
+                {
+                    "modDataMap": {}
+                },
+                {
+                    "modDataMap": {}
+                },
+                {
+                    "modDataMap": {}
+                }
+            ]
+        },
+        "suitPresetConfig": {
+            "suitPresetData": "None"
+        },
+        "itemInventorySlotAvailability": "Available",
+        "configSlotEntitlementId": None,
+        "configSlotItemId": None
+}
+
+gloves_slot = {
+        "gloveInSlotEntitlementId": "683E9A4127474014BFAF98464E1A865F",
+        "gloveInSlotAccelByteItemId": "638BF75BA8394A508E05B52117ECEEE4",
+        "gloveData": "None",
+        "itemInventorySlotAvailability": "Available",
+        "configSlotEntitlementId": None,
+        "configSlotItemId": None
+}
 
 with open('modded_save_data.json', 'r') as json_file:
     request_headers_data = json.load(json_file)
@@ -123,9 +211,8 @@ while True:
     except ValueError:
         print("Invalid input. Please enter a valid option.")
 
-repeat_request = int(input("Enter the total number of times you want the request to send: "))  
-
 if choice == 1:
+    repeat_request = int(input("Enter the total number of times you want the request to send: "))  
     for _ in range(repeat_request):
         data["itemId"] = "dd693796e4fb4e438971b65eecf6b4b7"
         data["price"] = 90000
@@ -144,31 +231,59 @@ elif choice == 2:
         data["price"] = price_custom
         data["discountedPrice"] = discounted_custom
         data["currencyCode"] = currency_custom
+        repeat_request = int(input("Enter the total number of times you want the request to send: "))  
         for _ in range(repeat_request):
             response = requests.post(url, json=data, headers=headers)
             print(f"Custom Item Purchased - {_ + 1}")
         delete_file("response.json") 
 
-elif choice == 3: 
+elif choice == 3:
     with open('Payday3_offsets.json', 'r') as json_file:
         item_id_json = json.load(json_file)
-    for _ in range(repeat_request):
-        print(f"Heist Item Purchased - {_ + 1}")
-        for item_id in item_id_json["itemId"]:
-            if item_id == "65a355215bb8473bbf9d3f2661211899":
-                data["itemId"] = item_id
-                data["price"] = 1999
-                data["discountedPrice"] = 1999
-                data["currencyCode"] = "CASH"
-                print(f"Item Purchased = {item_id}")
-            else:
-                data["itemId"] = item_id
+        all_items = [item for group in item_id_json["groups"] for item in group["items"]]
+
+        counter = 1
+        for group in item_id_json["groups"]:
+            print(f"{group['name']}:")
+            for item in group["items"]:
+                print(f"{counter}. {item['alias']} | {item['itemId']} | 1000")  # You can modify this format as needed
+                counter += 1
+            print()
+        print("Select 0 to buy All")
+        selection = int(input("Enter the number of the item you want to select: "))
+        repeat_request = int(input("Enter the total number of times you want the request to send: "))  
+        for _ in range(repeat_request):
+            if selection == 0:
+                for item in all_items:
+                    if item['itemId'] == "65a355215bb8473bbf9d3f2661211899":
+                        data["itemId"] = item['itemId']
+                        data["price"] = 1999
+                        data["discountedPrice"] = 1999
+                        data["currencyCode"] = "CASH"
+                        print(f"Item Purchased = {item['alias']}")
+                        response = requests.post(url, json=data, headers=headers)
+                        #print(response.content.decode('utf-8'))                                    
+                    else:
+                        data["itemId"] = item['itemId']
+                        data["price"] = 1000
+                        data["discountedPrice"] = 1000
+                        data["currencyCode"] = "CASH"
+                        print(f"Item Purchased = {item['alias']}")
+                        response = requests.post(url, json=data, headers=headers)
+                        #print(response.content.decode('utf-8'))
+            elif 1 <= selection <= len(all_items):
+                selected_item = all_items[selection - 1]
+                print(f"Selected Item ID: {selected_item['itemId']}")
+                data["itemId"] = selected_item['itemId']  # Assign the selected item's ID
                 data["price"] = 1000
                 data["discountedPrice"] = 1000
                 data["currencyCode"] = "CASH"
-                print(f"Item Purchased = {item_id}")
-            response = requests.post(url, json=data, headers=headers)
-    delete_file("response.json") 
+                print(f"Item Purchased = {item['alias']}")
+                response = requests.post(url, json=data, headers=headers)
+                #print(response.content.decode('utf-8'))
+            else:
+                print("Invalid selection. Please choose a valid number.")
+        delete_file("response.json") 
 
 elif choice == 4:
     response = requests.post(url_save_data, json=sava_data_profile, headers=headers)
@@ -176,3 +291,61 @@ elif choice == 4:
         #text_file.write(response.text)
     print("Modded Save loaded!")
     delete_file("response.json") 
+elif choice == 5:
+    delete_file("response.json")
+    print("Choose the data to generate:")
+    print("1. Weapon Inventory")
+    print("2. Mask Inventory")
+    print("3. Suite Inventory")
+    print("4. Gloves Inventory")
+
+    inventory = int(input("Enter the number: "))
+    json_filename = "inventory_slot.json"
+    with open(json_filename, "w") as json_file:
+        json_file.write("")
+
+    repeat_request = int(input("Enter the total number of times you want the request to send: "))  
+
+    if inventory == 1:
+        for _ in range(repeat_request):
+            create_data_dictionary()
+            weapon_slot["weaponInSlotEntitlementId"] = weaponInSlotEntitlementId
+            weapon_slot["weaponInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
+            weapon_slot["configSlotEntitlementId"] = configSlotEntitlementId
+            weapon_slot["configSlotItemId"] = configSlotItemId
+
+            with open(json_filename, "a") as json_file:
+               json.dump(weapon_slot, json_file, indent=2)
+               json_file.write(",\n")
+
+    elif inventory == 2:
+        for _ in range(repeat_request):
+            create_data_dictionary()
+            mask_slot["maskInSlotEntitlementId"] = weaponInSlotEntitlementId
+            mask_slot["maskInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
+            mask_slot["configSlotEntitlementId"] = configSlotEntitlementId
+            mask_slot["configSlotItemId"] = configSlotItemId
+
+            with open(json_filename, "a") as json_file:
+                json.dump(mask_slot, json_file, indent=2)
+                json_file.write(",\n")
+    elif inventory == 3:
+        for _ in range(repeat_request):
+            create_data_dictionary()
+            suit_slot["suitInSlotEntitlementId"] = weaponInSlotEntitlementId
+            suit_slot["suitInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
+            suit_slot["configSlotEntitlementId"] = configSlotEntitlementId
+            suit_slot["configSlotItemId"] = configSlotItemId
+
+            with open(json_filename, "a") as json_file:
+                json.dump(suit_slot, json_file, indent=2)
+                json_file.write(",\n")
+    elif inventory == 4:
+        for _ in range(repeat_request):
+            create_data_dictionary()
+            gloves_slot["configSlotEntitlementId"] = configSlotEntitlementId
+            gloves_slot["configSlotItemId"] = configSlotItemId
+
+            with open(json_filename, "a") as json_file:
+                json.dump(gloves_slot, json_file, indent=2)
+                json_file.write(",\n")
