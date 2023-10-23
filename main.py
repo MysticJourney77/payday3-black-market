@@ -11,6 +11,21 @@ random_bytes = secrets.token_bytes(16)
 
 random_string = ''.join(secrets.choice(string.hexdigits) for i in range(string_length))
 
+def generate_random_hex_string(string_length):
+    return ''.join(secrets.choice(string.hexdigits) for _ in range(string_length))
+
+def create_data_dictionary():
+    global configSlotEntitlementId
+    global configSlotItemId
+    global weaponInSlotEntitlementId
+    global weaponInSlotAccelByteItemId
+
+    weaponInSlotAccelByteItemId = generate_random_hex_string(string_length)
+    weaponInSlotEntitlementId = generate_random_hex_string(string_length)
+    configSlotEntitlementId = generate_random_hex_string(string_length)
+    configSlotItemId = generate_random_hex_string(string_length)
+    return
+
 token_header = {
         "Host": "nebula.starbreeze.com",
     "Content-Type": "application/x-www-form-urlencoded",
@@ -58,12 +73,14 @@ print("Option - 1 : Buy C-Stacks")
 print("Option - 2 : Custom Buy")
 print("Option - 3 : Heist Favors")
 print("Option - 4 : Import Customized Save Game")
+print("Option - 5 : Free Inventory Slots")
 
 options = {
     1: "Option - 1 : Buy C-Stacks",
     2: "Option - 2 : Custom Buy",
     3: "Option - 3 : Heist Favors",
     4: "Option - 4 : Modded Save"
+    5: "Option - 5 : Free Inventory"
 }
 with open("response.json", "r") as config_file:
    config_data = json.load(config_file)
@@ -93,6 +110,77 @@ data = {
     "region": "SE",
     "language": "en-US",
     "returnUrl": "http://127.0.0.1"
+}
+weapon_slot = {
+        "weaponInSlotEntitlementId": None,
+        "weaponInSlotAccelByteItemId": None,
+        "weaponInSlotAccelByteItemSku": "",
+        "weaponInventorySlotType": "Configurable",
+        "weaponConfigInventorySlot": {
+            "equippableConfig": {
+                "equippableData": "None",
+                "modDataMap": {}
+            },
+            "payedWeaponPartAttachmentItemIdArray": []
+        },
+        "weaponPresetConfigInventorySlot": {
+            "weaponPresetConfigData": "None"
+        },
+        "itemInventorySlotAvailability": "Available",
+        "configSlotEntitlementId": None,
+        "configSlotItemId": None
+}
+
+mask_slot = {
+        "maskInSlotEntitlementId": None,
+        "maskInSlotAccelByteItemId": None,
+        "maskInventorySlotType": "Configurable",
+        "maskConfig": {
+            "maskData": "None",
+            "modDataMap": {}
+        },
+        "maskPresetConfig": {
+            "maskPresetData": "None"
+        },
+        "itemInventorySlotAvailability": "Available",
+        "configSlotEntitlementId": None,
+        "configSlotItemId": None
+}
+
+suit_slot = {
+        "suitInSlotEntitlementId": None,
+        "suitInSlotAccelByteItemId": None,
+        "suitInventorySlotType": "Configurable",
+        "suitConfig": {
+            "suitData": "None",
+            "suitBaseData": "None",
+            "modDataMapArray": [
+                {
+                    "modDataMap": {}
+                },
+                {
+                    "modDataMap": {}
+                },
+                {
+                    "modDataMap": {}
+                }
+            ]
+        },
+        "suitPresetConfig": {
+            "suitPresetData": "None"
+        },
+        "itemInventorySlotAvailability": "Available",
+        "configSlotEntitlementId": None,
+        "configSlotItemId": None
+}
+
+gloves_slot = {
+        "gloveInSlotEntitlementId": "683E9A4127474014BFAF98464E1A865F",
+        "gloveInSlotAccelByteItemId": "638BF75BA8394A508E05B52117ECEEE4",
+        "gloveData": "None",
+        "itemInventorySlotAvailability": "Available",
+        "configSlotEntitlementId": None,
+        "configSlotItemId": None
 }
 
 with open('modded_save_data.json', 'r') as json_file:
@@ -176,3 +264,61 @@ elif choice == 4:
         #text_file.write(response.text)
     print("Modded Save loaded!")
     delete_file("response.json") 
+elif choice == 5:
+    delete_file("response.json")
+    print("Choose the data to generate:")
+    print("1. Weapon Inventory")
+    print("2. Mask Inventory")
+    print("3. Suite Inventory")
+    print("4. Gloves Inventory")
+
+    inventory = int(input("Enter the number: "))
+    json_filename = "inventory_slot.json"
+    with open(json_filename, "w") as json_file:
+        json_file.write("")
+
+    repeat_request = int(input("Enter the total number of times you want the request to send: "))  
+
+    if inventory == 1:
+        for _ in range(repeat_request):
+            create_data_dictionary()
+            weapon_slot["weaponInSlotEntitlementId"] = weaponInSlotEntitlementId
+            weapon_slot["weaponInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
+            weapon_slot["configSlotEntitlementId"] = configSlotEntitlementId
+            weapon_slot["configSlotItemId"] = configSlotItemId
+
+            with open(json_filename, "a") as json_file:
+               json.dump(weapon_slot, json_file, indent=2)
+               json_file.write(",\n")
+
+    elif inventory == 2:
+        for _ in range(repeat_request):
+            create_data_dictionary()
+            mask_slot["maskInSlotEntitlementId"] = weaponInSlotEntitlementId
+            mask_slot["maskInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
+            mask_slot["configSlotEntitlementId"] = configSlotEntitlementId
+            mask_slot["configSlotItemId"] = configSlotItemId
+
+            with open(json_filename, "a") as json_file:
+                json.dump(mask_slot, json_file, indent=2)
+                json_file.write(",\n")
+    elif inventory == 3:
+        for _ in range(repeat_request):
+            create_data_dictionary()
+            suit_slot["suitInSlotEntitlementId"] = weaponInSlotEntitlementId
+            suit_slot["suitInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
+            suit_slot["configSlotEntitlementId"] = configSlotEntitlementId
+            suit_slot["configSlotItemId"] = configSlotItemId
+
+            with open(json_filename, "a") as json_file:
+                json.dump(suit_slot, json_file, indent=2)
+                json_file.write(",\n")
+    elif inventory == 4:
+        for _ in range(repeat_request):
+            create_data_dictionary()
+            gloves_slot["configSlotEntitlementId"] = configSlotEntitlementId
+            gloves_slot["configSlotItemId"] = configSlotItemId
+
+            with open(json_filename, "a") as json_file:
+                json.dump(gloves_slot, json_file, indent=2)
+                json_file.write(",\n")
