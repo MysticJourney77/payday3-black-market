@@ -74,13 +74,14 @@ print("Option - 2 : Custom Buy")
 print("Option - 3 : Heist Favors")
 print("Option - 4 : Import Customized Save Game")
 print("Option - 5 : Free Inventory Slots")
-
+print("Option - 6 : Import Non Modded Save Game")
 options = {
     1: "Option - 1 : Buy C-Stacks",
     2: "Option - 2 : Custom Buy",
     3: "Option - 3 : Heist Favors",
     4: "Option - 4 : Modded Save",
-    5: "Option - 5 : Free Inventory"
+    5: "Option - 5 : Free Inventory",
+    6: "Option - 6 : Non Modded Save"
 }
 with open("response.json", "r") as config_file:
    config_data = json.load(config_file)
@@ -186,6 +187,14 @@ gloves_slot = {
 with open('modded_save_data.json', 'r') as json_file:
     request_headers_data = json.load(json_file)
 sava_data_profile = request_headers_data
+
+with open('non_modded_save_data.json', 'r') as json_file:
+    request_headers_data = json.load(json_file)
+non_modded_save_data = request_headers_data
+
+with open('non_modded_save_skills_data.json', 'r') as json_file:
+    request_headers_data = json.load(json_file)
+non_modded_save_skills_data = request_headers_data
 
 def delete_file(file_path):
     if os.path.exists(file_path):
@@ -349,3 +358,15 @@ elif choice == 5:
             with open(json_filename, "a") as json_file:
                 json.dump(gloves_slot, json_file, indent=2)
                 json_file.write(",\n")
+elif choice == 6:
+    print("1. Non modded save with no skills")
+    print("2. Non modded save with all skills unlocked.")
+    skills_data = int(input("Enter your choice: "))
+    if skills_data == 1:
+        response = requests.post(url_save_data, json=non_modded_save_data, headers=headers)
+        print("Non Modded with no skills Save loaded!")
+        delete_file("response.json")
+    else:
+        response = requests.post(url_save_data, json=non_modded_save_skills_data, headers=headers)
+        print("Non Modded with with skills Save loaded!")
+        delete_file("response.json")
