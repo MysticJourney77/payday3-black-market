@@ -244,7 +244,7 @@ while True :
                 for heist_info in heist_data:
                     print("\n" f"{heist_alias}: ")
                     for key, value in heist_info.items():
-                        print(f"{counter}. {key}: {value["price"]}$")
+                        print(f"{counter}. {key}: {value['price']}$")
                         heist_list.append((key,value))
                         counter += 1
         print()
@@ -422,7 +422,7 @@ while True :
                 for suite_info in suite_data:
                     print("\n" f"{suite_alias}: ")
                     for key, value in suite_info.items():
-                        print(f"{counter}. {key}: {value["price"]}$")
+                        print(f"{counter}. {key}: {value['price']}$")
                         suite_list.append((key, value))
                         counter += 1                        
         print()
@@ -492,7 +492,7 @@ while True :
         counter = 1
         for inventory_slots_info in inventory_slots:
             for key, value in inventory_slots_info.items():
-                print(f"{counter}. {key}: {value["price"]}$")
+                print(f"{counter}. {key}: {value['price']}$")
                 inventory_slots_list.append((key, value))
                 counter += 1
         print()
