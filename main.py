@@ -145,12 +145,12 @@ while True :
     print("Option - 1 : Buy C-Stacks")
     print("Option - 2 : Custom Buy")
     print("Option - 3 : Buy Heist Favors")
-    print("Option - 4 : Import Customized Save Game")
-    print("Option - 5 : Free Guns and Inventory Slots")
-    print("Option - 6 : Buy Outfits")
-    print("Option - 7 : Buy Paint Scheme")
-    print("Option - 8 : Buy Inventory")
-    print("Option - 9 : Buy Paint")
+    #print("Option - 4 : Import Customized Save Game")
+    #print("Option - 5 : Free Guns and Inventory Slots")
+    print("Option - 4 : Buy Outfits")
+    print("Option - 5 : Buy Paint Scheme")
+    print("Option - 6 : Buy Inventory")
+    print("Option - 7 : Buy Paint")
     print("Option - 0 : Exit")
 
     options = {
@@ -158,12 +158,10 @@ while True :
     1: "Option - 1 : Buy C-Stacks",
     2: "Option - 2 : Custom Buy",
     3: "Option - 3 : Heist Favors",
-    4: "Option - 4 : Save Data",
-    5: "Option - 5 : Inventory",
-    6: "Option - 6 : Dress",
-    7: "Option - 7 : Paint Scheme",
-    8: "Option - 8 : Inventory",
-    9: "Option - 9 : Paint"
+    4: "Option - 4 : Dress",
+    5: "Option - 5 : Paint Scheme",
+    6: "Option - 6 : Inventory",
+    7: "Option - 7 : Paint"
    }
     config_data = read_json_file("response.json")
     account_id = config_data.get("user_id", "")
@@ -288,131 +286,131 @@ while True :
                 print(f"Item Purchased = {heist_add[0]}")
         delete_file("response.json")
 
+    # elif choice == 4:
+    #     print("1. Modded Save")
+    #     print("2. Non Modded Save")
+    #     save = int(input("Enter the option: "))
+    #     if save == 1:
+    #         response = requests.post(url_save_data, json=save_data_profile, headers=headers)
+    #         print("Modded Save loaded!")
+    #     elif save == 2:
+    #         response = requests.post(url_save_data, json=non_modded_save_data, headers=headers)
+    #         print("Non Modded Save loaded!")
+    #     else:
+    #         print("Invalid Input")
+    #         continue
+
+    # elif choice == 5:
+    #     delete_file("response.json")
+    #     print("Choose the data to generate:")
+    #     print("1. Guns")
+    #     print("2. Inventory")
+    #     options_select = int(input("Enter the Option: "))
+    #     if options_select == 1:
+    #         delete_file("response.json")
+    #         json_filename_weapons = "weapons.json"
+    #         clear_json_file(json_filename_weapons)
+    #         item_id_json = read_json_file("Payday3_offsets.json")
+    #         weapons = item_id_json["weapons"]
+    #         weapon_list = []
+    #         counter = 1
+    #         for weapon_group in weapons:
+    #             for weapon_alias, weapon_data in weapon_group.items():
+    #                 for weapon_info in weapon_data:
+    #                     print(f"{counter}. {weapon_alias}")
+    #                     weapon_list.append((weapon_alias, weapon_info))
+    #                     counter += 1
+    #         selected_weapons = [] 
+    #         while True:
+    #             print("Enter 0 to Exit!")
+    #             weapon_select = int(input("Enter the number of the item you want to select: "))
+    #             if weapon_select == 0:
+    #                 break  
+    #             elif 1 <= weapon_select <= counter:
+    #                 selected_weapon = weapon_list[weapon_select - 1]
+    #                 selected_weapons.append(selected_weapon)
+    #                 print(f"Added {selected_weapon[0]} to Cart.")
+    #             else:
+    #                 print("Invalid selection. Please choose a valid option.")
+    #         for selected_weapon in selected_weapons:
+    #             create_data_dictionary()
+    #             data = read_json_file("Payday3_offsets.json")
+    #             primary_weapons = data["Inventory"][1]["weapon_slot"][0]
+    #             primary_weapons["weaponInSlotAccelByteItemSku"] = selected_weapon[1]["weaponInSlotAccelByteItemSku"]
+    #             data["Inventory"][1]["weapon_slot"][0]["weaponConfigInventorySlot"]["equippableConfig"]["equippableData"] = selected_weapon[1]["equippableData"]
+    #             primary_weapons["itemInventorySlotAvailability"] = selected_weapon[1]["itemInventorySlotAvailability"]
+    #             primary_weapons["weaponInSlotEntitlementId"] = weaponInSlotEntitlementId
+    #             primary_weapons["weaponInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
+    #             primary_weapons["configSlotEntitlementId"] = configSlotEntitlementId
+    #             primary_weapons["configSlotItemId"] = configSlotItemId
+
+    #             append_to_json("weapons.json" , primary_weapons)
+    #             print(f"Added {selected_weapon[0]} to the Weapons.json file.")
+    #         print("Finished selecting and appending weapons.")
+    #     elif options_select == 2:
+    #         print("1. Weapon Inventory")
+    #         print("2. Mask Inventory")
+    #         print("3. Suite Inventory")
+    #         print("4. Gloves Inventory")
+    #         inventory = int(input("Enter the number: "))
+    #         json_filename_inv = "inventory_slot.json"
+    #         clear_json_file(json_filename_inv)
+    #         repeat_request_inventory = int(input("Enter the total number of times you want the request to send: "))  
+
+    #         if inventory == 1:
+    #             data = read_json_file("Payday3_offsets.json")
+    #             for _ in range(repeat_request_inventory):
+    #                 create_data_dictionary()
+    #                 weapon_slot = data["Inventory"][1]["weapon_slot"][0]
+    #                 weapon_slot["weaponInSlotEntitlementId"] = weaponInSlotEntitlementId
+    #                 weapon_slot["weaponInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
+    #                 weapon_slot["configSlotEntitlementId"] = configSlotEntitlementId
+    #                 weapon_slot["configSlotItemId"] = configSlotItemId
+
+    #                 append_to_json("inventory_slot.json", weapon_slot)
+    #             print("Weapons slot added to inventory_slot.json")
+
+    #         elif inventory == 2:
+    #             data = read_json_file("Payday3_offsets.json")
+    #             for _ in range(repeat_request_inventory):
+    #                 create_data_dictionary()
+    #                 mask_slot = data["Inventory"][2]["mask_slot"][0]
+    #                 mask_slot["maskInSlotEntitlementId"] = weaponInSlotEntitlementId
+    #                 mask_slot["maskInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
+    #                 mask_slot["configSlotEntitlementId"] = configSlotEntitlementId
+    #                 mask_slot["configSlotItemId"] = configSlotItemId
+
+    #                 append_to_json("inventory_slot.json", mask_slot)
+    #             print("Mask slot added to inventory_slot.json")
+    #         elif inventory == 3:
+    #             with open('Payday3_offsets.json', 'r') as json_file:
+    #                 data = json.load(json_file)
+    #             for _ in range(repeat_request_inventory):
+    #                 create_data_dictionary()
+    #                 suit_data = data["Inventory"][0]["suit"][0]
+    #                 suit_data["suitInSlotEntitlementId"] = weaponInSlotEntitlementId
+    #                 suit_data["suitInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
+    #                 suit_data["configSlotEntitlementId"] = configSlotEntitlementId
+    #                 suit_data["configSlotItemId"] = configSlotItemId
+
+    #                 append_to_json("inventory_slot.json", suit_data)
+    #             print("Suit slot added to inventory_slot.json")
+    #         elif inventory == 4:
+    #             with open('Payday3_offsets.json', 'r') as json_file:
+    #                 data = json.load(json_file)
+    #             for _ in range(repeat_request_inventory):
+    #                 create_data_dictionary()
+    #                 gloves_slot = data["Inventory"][3]["glove_slot"][0]
+    #                 gloves_slot["configSlotEntitlementId"] = configSlotEntitlementId
+    #                 gloves_slot["configSlotItemId"] = configSlotItemId
+
+    #                 append_to_json("inventory_slot.json", gloves_slot)
+    #             print("Gloves slot added to inventory_slot.json")
+    #     else:
+    #         print("Invalid Input")
+    #         continue
+
     elif choice == 4:
-        print("1. Modded Save")
-        print("2. Non Modded Save")
-        save = int(input("Enter the option: "))
-        if save == 1:
-            response = requests.post(url_save_data, json=save_data_profile, headers=headers)
-            print("Modded Save loaded!")
-        elif save == 2:
-            response = requests.post(url_save_data, json=non_modded_save_data, headers=headers)
-            print("Non Modded Save loaded!")
-        else:
-            print("Invalid Input")
-            continue
-
-    elif choice == 5:
-        delete_file("response.json")
-        print("Choose the data to generate:")
-        print("1. Guns")
-        print("2. Inventory")
-        options_select = int(input("Enter the Option: "))
-        if options_select == 1:
-            delete_file("response.json")
-            json_filename_weapons = "weapons.json"
-            clear_json_file(json_filename_weapons)
-            item_id_json = read_json_file("Payday3_offsets.json")
-            weapons = item_id_json["weapons"]
-            weapon_list = []
-            counter = 1
-            for weapon_group in weapons:
-                for weapon_alias, weapon_data in weapon_group.items():
-                    for weapon_info in weapon_data:
-                        print(f"{counter}. {weapon_alias}")
-                        weapon_list.append((weapon_alias, weapon_info))
-                        counter += 1
-            selected_weapons = [] 
-            while True:
-                print("Enter 0 to Exit!")
-                weapon_select = int(input("Enter the number of the item you want to select: "))
-                if weapon_select == 0:
-                    break  
-                elif 1 <= weapon_select <= counter:
-                    selected_weapon = weapon_list[weapon_select - 1]
-                    selected_weapons.append(selected_weapon)
-                    print(f"Added {selected_weapon[0]} to Cart.")
-                else:
-                    print("Invalid selection. Please choose a valid option.")
-            for selected_weapon in selected_weapons:
-                create_data_dictionary()
-                data = read_json_file("Payday3_offsets.json")
-                primary_weapons = data["Inventory"][1]["weapon_slot"][0]
-                primary_weapons["weaponInSlotAccelByteItemSku"] = selected_weapon[1]["weaponInSlotAccelByteItemSku"]
-                data["Inventory"][1]["weapon_slot"][0]["weaponConfigInventorySlot"]["equippableConfig"]["equippableData"] = selected_weapon[1]["equippableData"]
-                primary_weapons["itemInventorySlotAvailability"] = selected_weapon[1]["itemInventorySlotAvailability"]
-                primary_weapons["weaponInSlotEntitlementId"] = weaponInSlotEntitlementId
-                primary_weapons["weaponInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
-                primary_weapons["configSlotEntitlementId"] = configSlotEntitlementId
-                primary_weapons["configSlotItemId"] = configSlotItemId
-
-                append_to_json("weapons.json" , primary_weapons)
-                print(f"Added {selected_weapon[0]} to the Weapons.json file.")
-            print("Finished selecting and appending weapons.")
-        elif options_select == 2:
-            print("1. Weapon Inventory")
-            print("2. Mask Inventory")
-            print("3. Suite Inventory")
-            print("4. Gloves Inventory")
-            inventory = int(input("Enter the number: "))
-            json_filename_inv = "inventory_slot.json"
-            clear_json_file(json_filename_inv)
-            repeat_request_inventory = int(input("Enter the total number of times you want the request to send: "))  
-
-            if inventory == 1:
-                data = read_json_file("Payday3_offsets.json")
-                for _ in range(repeat_request_inventory):
-                    create_data_dictionary()
-                    weapon_slot = data["Inventory"][1]["weapon_slot"][0]
-                    weapon_slot["weaponInSlotEntitlementId"] = weaponInSlotEntitlementId
-                    weapon_slot["weaponInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
-                    weapon_slot["configSlotEntitlementId"] = configSlotEntitlementId
-                    weapon_slot["configSlotItemId"] = configSlotItemId
-
-                    append_to_json("inventory_slot.json", weapon_slot)
-                print("Weapons slot added to inventory_slot.json")
-
-            elif inventory == 2:
-                data = read_json_file("Payday3_offsets.json")
-                for _ in range(repeat_request_inventory):
-                    create_data_dictionary()
-                    mask_slot = data["Inventory"][2]["mask_slot"][0]
-                    mask_slot["maskInSlotEntitlementId"] = weaponInSlotEntitlementId
-                    mask_slot["maskInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
-                    mask_slot["configSlotEntitlementId"] = configSlotEntitlementId
-                    mask_slot["configSlotItemId"] = configSlotItemId
-
-                    append_to_json("inventory_slot.json", mask_slot)
-                print("Mask slot added to inventory_slot.json")
-            elif inventory == 3:
-                with open('Payday3_offsets.json', 'r') as json_file:
-                    data = json.load(json_file)
-                for _ in range(repeat_request_inventory):
-                    create_data_dictionary()
-                    suit_data = data["Inventory"][0]["suit"][0]
-                    suit_data["suitInSlotEntitlementId"] = weaponInSlotEntitlementId
-                    suit_data["suitInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
-                    suit_data["configSlotEntitlementId"] = configSlotEntitlementId
-                    suit_data["configSlotItemId"] = configSlotItemId
-
-                    append_to_json("inventory_slot.json", suit_data)
-                print("Suit slot added to inventory_slot.json")
-            elif inventory == 4:
-                with open('Payday3_offsets.json', 'r') as json_file:
-                    data = json.load(json_file)
-                for _ in range(repeat_request_inventory):
-                    create_data_dictionary()
-                    gloves_slot = data["Inventory"][3]["glove_slot"][0]
-                    gloves_slot["configSlotEntitlementId"] = configSlotEntitlementId
-                    gloves_slot["configSlotItemId"] = configSlotItemId
-
-                    append_to_json("inventory_slot.json", gloves_slot)
-                print("Gloves slot added to inventory_slot.json")
-        else:
-            print("Invalid Input")
-            continue
-
-    elif choice == 6:
         item_id_json = read_json_file("Payday3_offsets.json")
         suite = item_id_json["Suits"]
         suite_list = []
@@ -450,7 +448,7 @@ while True :
             response = requests.post(url, json=data, headers=headers)
             print(f"Item Bought Successfully - {newsuite_add[0]}")
     
-    elif choice  == 7:
+    elif choice  == 5:
         item_id_json = read_json_file("Payday3_offsets.json")
         weapon_paint = item_id_json["Weapon Paint Schemes"]
         weapon_paint_list = []
@@ -485,7 +483,7 @@ while True :
             print(response.content.decode('utf-8'))
             print(f"Item Bought Successfully - {weapon_paint_add[0]}")
 
-    elif choice == 8:
+    elif choice == 6:
         item_id_json = read_json_file("Payday3_offsets.json")
         inventory_slots = item_id_json["Inventory Slots"]
         inventory_slots_list = []
@@ -521,7 +519,7 @@ while True :
                 response = requests.post(url, json=data, headers=headers)
                 print(f"Item Bought Successfully - {inventory_slots_add[0]} {_ + 1}")
 
-    elif choice == 9:
+    elif choice == 7:
         item_id_json = read_json_file("Payday3_offsets.json")
         color_paint = item_id_json["Paint Schemes_All"]
         color_list = []
