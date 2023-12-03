@@ -1,99 +1,4 @@
 {
-    "Inventory":[
-        {
-            "suit":[
-                {
-                    "suitInSlotEntitlementId": null,
-                    "suitInSlotAccelByteItemId": null,
-                    "suitInventorySlotType": "Configurable",
-                    "suitConfig": {
-                        "suitData": "None",
-                        "suitBaseData": "None",
-                        "modDataMapArray": [
-                            {
-                                "modDataMap": {}
-                            },
-                            {
-                                "modDataMap": {}
-                            },
-                            {
-                                "modDataMap": {}
-                            }
-                        ]
-                    },
-                    "suitPresetConfig": {
-                        "suitPresetData": "None"
-                    },
-                    "itemInventorySlotAvailability": "Available",
-                    "configSlotEntitlementId": null,
-                    "configSlotItemId": null
-                }
-            ]
-        },
-        {
-            "weapon_slot":[
-                {
-                    "weaponInSlotEntitlementId": null,
-                    "weaponInSlotAccelByteItemId": null,
-                    "weaponInSlotAccelByteItemSku": "",
-                    "weaponInventorySlotType": "Configurable",
-                    "weaponConfigInventorySlot":
-                    {
-                        "equippableConfig":
-                        {
-                            "equippableData": "None",
-                            "modDataMap":
-                            {
-                            }
-                        },
-                        "payedWeaponPartAttachmentItemIdArray": []
-                    },
-                    "weaponPresetConfigInventorySlot":
-                    {
-                        "weaponPresetConfigData": "None"
-                    },
-                    "itemInventorySlotAvailability": "Available",
-                    "configSlotEntitlementId": null,
-                    "configSlotItemId": null
-                }
-            ]
-        },
-        {
-            "mask_slot": [
-                {
-                    "maskInSlotEntitlementId": null,
-                    "maskInSlotAccelByteItemId": null,
-                    "maskInventorySlotType": "Configurable",
-                    "maskConfig":
-                    {
-                        "maskData": "None",
-                        "modDataMap":
-                        {
-                        }
-                    },
-                    "maskPresetConfig":
-                    {
-                        "maskPresetData": "None"
-                    },
-                    "itemInventorySlotAvailability": "Available",
-                    "configSlotEntitlementId": null,
-                    "configSlotItemId": null
-                }
-            ]
-        },
-        {
-            "glove_slot" : [
-                {
-                    "gloveInSlotEntitlementId": null,
-                    "gloveInSlotAccelByteItemId": null,
-                    "gloveData": "None",
-                    "itemInventorySlotAvailability": "Available",
-                    "configSlotEntitlementId": "7B65114CDA27473AA2D90DBB20FDE182",
-                    "configSlotItemId": "C5E2C128DAE04D2FB9065656A0EC62A3"
-                }
-            ]
-        }
-    ],
     "Heistfav": [
            {
             "No Rest For The Wicked": [
@@ -270,195 +175,53 @@
                         }
                     }
                 ]
+            },
+            {
+                "Cook off":[
+                    {
+                        "Faster Supply Drop":{
+                            "price": 1000,
+                            "itemId": "04dfe4043b9449549e6c897ad413929b"
+                        },
+                        "More Hostages":{
+                            "price": 1000,
+                            "itemId": "84eff09190304f8ca6d4b964fbe99a2c"
+                        },
+                        "Permanent Escape Van":{
+                            "price": 1000,
+                            "itemId": "a96c77c1d5d54e5180e0486c78e95998"
+                        },
+                        "Longer Purity Window":{
+                            "price": 1000,
+                            "itemId": "24feafdb91504f458670a133d86ea37e"
+                        }
+                    }
+                ]
+            },
+            {
+                "Turbid Station":[
+                    {
+                        "Longer Extraction":{
+                            "price": 1000,
+                            "itemId": "1543ccb3ff5146f4b713911839d493d0"
+                        },
+                        "Longer Remote Door Timer":{
+                            "price": 1000,
+                            "itemId": "bdba4c27cfad4225ad1faa263a1d5f4a"
+                        },
+                        "More Lures":{
+                            "price": 1000,
+                            "itemId": "b8e2a0ce38444458bc50d1a3e5bb075d"
+                        },
+                        "Fewer Drones":{
+                            "price": 1000,
+                            "itemId": "9ef4512c63e04a1d8f4f447db1dd0117"
+                        }
+                    }
+                ]
             }
     ],
 
-
-    "weapons" : [
-        {
-            "CAR4": [
-            {
-            "weaponInSlotAccelByteItemSku" : "pd3_wpn_assaultrifle_car4",
-            "equippableData" : "SBZRangedWeaponData'/Game/Gameplay/Weapons/AssaultRifle/CAR4/DA_WeaponData_AssaultRifle_CAR4_xdotx_DA_WeaponData_AssaultRifle_CAR4'",
-            "itemInventorySlotAvailability" : "Taken",
-            "alias": "CAR-4"
-            }
-        ]
-        },
-        {
-            "Reinfield 880" : [
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_shotgun_r880",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/Shotgun/R880/DA_WeaponData_Shotgun_R880_xdotx_DA_WeaponData_Shotgun_R880'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "Reinfield 880"
-                }
-            ]
-
-        },
-        {
-            "SA A114":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_marksman_a114",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/Marksman/A114/DA_WeaponData_Marksman_A114_xdotx_DA_WeaponData_Marksman_A114'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "SA A114"
-                }
-            ]
-
-        },
-        {
-            "FIK PC9":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_smg_pc9",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/SMG/PC9/DA_WeaponData_SMG_PC9_xdotx_DA_WeaponData_SMG_PC9'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "FIK PC9"
-                }
-            ]
-        },
-        {
-            "Northwest B-9":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_assaultrifle_nwb9",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/AssaultRifle/NWB9/DA_WeaponData_AssaultRifle_NWB9_xdotx_DA_WeaponData_AssaultRifle_NWB9'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "Northwest B-9"
-                }
-            ]
-        },
-        {
-            "Ziv Commando":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_smg_commando",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/SMG/Commando/DA_WeaponData_SMG_Commando_xdotx_DA_WeaponData_SMG_Commando'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "Ziv Commando"
-                }
-            ]
-        },
-        {
-            "KU-59":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_assaultrifle_ku59",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/AssaultRifle/KU59/DA_WeaponData_AssaultRifle_KU59_xdotx_DA_WeaponData_AssaultRifle_KU59'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "KU-59"
-                }
-            ]
-        },
-        {
-            "Mosconi 12C":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_shotgun_mosconi12c",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/Shotgun/Mosconi12C/DA_WeaponData_Shotgun_Mosconi12C_xdotx_DA_WeaponData_Shotgun_Mosconi12C'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "Mosconi 12C"
-                }
-            ]
-        },
-        {
-            "Reinfield 900s":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_marksman_r900s",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/Marksman/R900S/DA_WeaponData_Marksman_R900S_xdotx_DA_WeaponData_Marksman_R900S'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "Reinfield 900s"
-                }
-            ]
-        },
-        {
-            "SG Compact-7":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_smg_compact7",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/SMG/Compact7/DA_WeaponData_SMG_Compact7_xdotx_DA_WeaponData_SMG_Compact7'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "SG Compact-7"
-                }
-            ]
-        },
-        {
-            "VF-7S":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_assaultrifle_vf7s",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/AssaultRifle/VF7S/DA_WeaponData_AssaultRifle_VF7S_xdotx_DA_WeaponData_AssaultRifle_VF7S'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "VF-7S"
-                }
-            ]
-        },
-        {
-            "Signature 40":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_pistol_s40",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/Pistol/S40/DA_WeaponData_Pistol_S40_xdotx_DA_WeaponData_Pistol_S40'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "Signature 40"
-                }
-            ] 
-        },
-        {
-            "Castigo 44":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_pistol_stryk7",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/Pistol/Stryk7/DA_WeaponData_Pistol_Stryk7_xdotx_DA_WeaponData_Pistol_Stryk7'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "Stryk 7"
-                }
-            ]
-        },
-        {
-            "SP Model 11":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_pistol_spm11",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/Pistol/SPM11/DA_WeaponData_Pistol_SPM11_xdotx_DA_WeaponData_Pistol_SPM11'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "SP Model 11"    
-                }
-            ]
-
-        },
-        {
-            "Signature 403":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_pistol_s403",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/Pistol/S403/DA_WeaponData_Pistol_S403_xdotx_DA_WeaponData_Pistol_S403'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "Signature 403"
-                }
-            ]
-        },
-        {
-            "Sforza Bison":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_revolver_bison",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/Revolver/Bison/DA_WeaponData_Revolver_Bison_xdotx_DA_WeaponData_Revolver_Bison'",
-                    "itemInventorySlotAvailability": "Taken",
-                    "alias": "Sforza Bison" 
-                }
-            ]
-        },
-        {
-            "Marcom Mamba GL":[
-                {
-                    "weaponInSlotAccelByteItemSku": "pd3_wpn_overkill_mamba",
-                    "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/OVK/Mamba/DA_WeaponData_OVK_Mamba_xdotx_DA_WeaponData_OVK_Mamba'",
-                    "itemInventorySlotAvailability": "UNPURCHASABLE",
-                    "alias": "Marcom Mamba GL"   
-                }
-            ]
-        },
-        {
-            "HET-5 Red Fox":[
-                {
-            "weaponInSlotAccelByteItemSku": "pd3_wpn_overkill_het5",
-            "equippableData": "SBZRangedWeaponData'/Game/Gameplay/Weapons/OVK/HET5/DA_WeaponData_OVK_HET5_xdotx_DA_WeaponData_OVK_HET5'",
-            "itemInventorySlotAvailability": "UNPURCHASABLE",
-            "alias": "HET-5 Red Fox"
-        }
-        ] 
-    }
-  ],
   "Suits": [
     {
         "Suit 1: Base/Variants": [
@@ -1012,5 +775,3 @@
 ]
 
 }
-
-

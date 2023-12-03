@@ -145,8 +145,6 @@ while True :
     print("Option - 1 : Buy C-Stacks")
     print("Option - 2 : Custom Buy")
     print("Option - 3 : Buy Heist Favors")
-    #print("Option - 4 : Import Customized Save Game")
-    #print("Option - 5 : Free Guns and Inventory Slots")
     print("Option - 4 : Buy Outfits")
     print("Option - 5 : Buy Paint Scheme")
     print("Option - 6 : Buy Inventory")
@@ -182,17 +180,15 @@ while True :
     "User-Agent": "PAYDAY3/++UE4+Release-4.27-CL-0 Windows/10.0.19045.1.256.64bit",
    }
     data = {
-    "itemId": None,  
+    'itemId': None,  
     "quantity": 1,
-    "price": None,
-    "discountedPrice": None,
-    "currencyCode": None,
+    'price': None,
+    'discountedPrice': None,
+    'currencyCode': None,
     "region": "SE",
     "language": "en-US",
     "returnUrl": "http://127.0.0.1"
     }
-    save_data_profile = read_json_file("modded_save_data.json")
-    non_modded_save_data = read_json_file("non_modded_save_data.json")
     
     while True:
         try:
@@ -209,10 +205,10 @@ while True :
     elif choice == 1:
         repeat_request_cstack = int(input("Enter the total number of times you want the request to send: "))
         for _ in range(repeat_request_cstack):
-            data["itemId"] = "dd693796e4fb4e438971b65eecf6b4b7"
-            data["price"] = 90000
-            data["discountedPrice"] = 90000
-            data["currencyCode"] = "CASH"
+            data['itemId'] = "dd693796e4fb4e438971b65eecf6b4b7"
+            data['price'] = 90000
+            data['discountedPrice'] = 90000
+            data['currencyCode'] = "CASH"
             response = requests.post(url, json=data, headers=headers)
             print(f"C-Stacks Bought successfully - {_ + 1}")
         delete_file("response.json")
@@ -222,10 +218,10 @@ while True :
         price_custom = int(input("Enter price: "))
         discounted_custom = int(input("Enter discountedprice: "))
         currency_custom = get_valid_currencycode()
-        data["itemId"] = item_id_custom
-        data["price"] = price_custom
-        data["discountedPrice"] = discounted_custom
-        data["currencyCode"] = currency_custom
+        data['itemId'] = item_id_custom
+        data['price'] = price_custom
+        data['discountedPrice'] = discounted_custom
+        data['currencyCode'] = currency_custom
         repeat_request_custom = int(input("Enter the total number of times you want the request to send: "))  
         for _ in range(repeat_request_custom):
             response = requests.post(url, json=data, headers=headers)
@@ -234,7 +230,7 @@ while True :
 
     elif choice == 3:
         item_id_json = read_json_file("Payday3_offsets.json")
-        heistfav = item_id_json["Heistfav"]
+        heistfav = item_id_json['Heistfav']
         heist_list = []
         counter = 1
         for heist_group in heistfav:
@@ -263,10 +259,10 @@ while True :
                     item_id = item_data['itemId']
                     price = item_data['price']
                     for _ in range(repeat_request_heistfav_1):
-                        data["itemId"] = item_id
-                        data["price"] = price
-                        data["discountedPrice"] = price
-                        data["currencyCode"] = "CASH"
+                        data['itemId'] = item_id
+                        data['price'] = price
+                        data['discountedPrice'] = price
+                        data['currencyCode'] = "CASH"
                         response = requests.post(url, json=data, headers=headers)
                     print(f"Item Purchased")
                         
@@ -278,141 +274,17 @@ while True :
                 heist_id = heist_added_inv[0]
                 heist_details = heist_id[1]
                 item_id = heist_details['itemId']
-                data["itemId"] = heist_id[1]['itemId']
-                data["price"] = heist_id[1]["price"]
-                data["discountedPrice"] = heist_id[1]["price"]
-                data["currencyCode"] = "CASH"
+                data['itemId'] = heist_id[1]['itemId']
+                data['price'] = heist_id[1]['price']
+                data['discountedPrice'] = heist_id[1]['price']
+                data['currencyCode'] = "CASH"
                 response = requests.post(url, json=data, headers=headers)
                 print(f"Item Purchased = {heist_add[0]}")
         delete_file("response.json")
 
-    # elif choice == 4:
-    #     print("1. Modded Save")
-    #     print("2. Non Modded Save")
-    #     save = int(input("Enter the option: "))
-    #     if save == 1:
-    #         response = requests.post(url_save_data, json=save_data_profile, headers=headers)
-    #         print("Modded Save loaded!")
-    #     elif save == 2:
-    #         response = requests.post(url_save_data, json=non_modded_save_data, headers=headers)
-    #         print("Non Modded Save loaded!")
-    #     else:
-    #         print("Invalid Input")
-    #         continue
-
-    # elif choice == 5:
-    #     delete_file("response.json")
-    #     print("Choose the data to generate:")
-    #     print("1. Guns")
-    #     print("2. Inventory")
-    #     options_select = int(input("Enter the Option: "))
-    #     if options_select == 1:
-    #         delete_file("response.json")
-    #         json_filename_weapons = "weapons.json"
-    #         clear_json_file(json_filename_weapons)
-    #         item_id_json = read_json_file("Payday3_offsets.json")
-    #         weapons = item_id_json["weapons"]
-    #         weapon_list = []
-    #         counter = 1
-    #         for weapon_group in weapons:
-    #             for weapon_alias, weapon_data in weapon_group.items():
-    #                 for weapon_info in weapon_data:
-    #                     print(f"{counter}. {weapon_alias}")
-    #                     weapon_list.append((weapon_alias, weapon_info))
-    #                     counter += 1
-    #         selected_weapons = [] 
-    #         while True:
-    #             print("Enter 0 to Exit!")
-    #             weapon_select = int(input("Enter the number of the item you want to select: "))
-    #             if weapon_select == 0:
-    #                 break  
-    #             elif 1 <= weapon_select <= counter:
-    #                 selected_weapon = weapon_list[weapon_select - 1]
-    #                 selected_weapons.append(selected_weapon)
-    #                 print(f"Added {selected_weapon[0]} to Cart.")
-    #             else:
-    #                 print("Invalid selection. Please choose a valid option.")
-    #         for selected_weapon in selected_weapons:
-    #             create_data_dictionary()
-    #             data = read_json_file("Payday3_offsets.json")
-    #             primary_weapons = data["Inventory"][1]["weapon_slot"][0]
-    #             primary_weapons["weaponInSlotAccelByteItemSku"] = selected_weapon[1]["weaponInSlotAccelByteItemSku"]
-    #             data["Inventory"][1]["weapon_slot"][0]["weaponConfigInventorySlot"]["equippableConfig"]["equippableData"] = selected_weapon[1]["equippableData"]
-    #             primary_weapons["itemInventorySlotAvailability"] = selected_weapon[1]["itemInventorySlotAvailability"]
-    #             primary_weapons["weaponInSlotEntitlementId"] = weaponInSlotEntitlementId
-    #             primary_weapons["weaponInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
-    #             primary_weapons["configSlotEntitlementId"] = configSlotEntitlementId
-    #             primary_weapons["configSlotItemId"] = configSlotItemId
-
-    #             append_to_json("weapons.json" , primary_weapons)
-    #             print(f"Added {selected_weapon[0]} to the Weapons.json file.")
-    #         print("Finished selecting and appending weapons.")
-    #     elif options_select == 2:
-    #         print("1. Weapon Inventory")
-    #         print("2. Mask Inventory")
-    #         print("3. Suite Inventory")
-    #         print("4. Gloves Inventory")
-    #         inventory = int(input("Enter the number: "))
-    #         json_filename_inv = "inventory_slot.json"
-    #         clear_json_file(json_filename_inv)
-    #         repeat_request_inventory = int(input("Enter the total number of times you want the request to send: "))  
-
-    #         if inventory == 1:
-    #             data = read_json_file("Payday3_offsets.json")
-    #             for _ in range(repeat_request_inventory):
-    #                 create_data_dictionary()
-    #                 weapon_slot = data["Inventory"][1]["weapon_slot"][0]
-    #                 weapon_slot["weaponInSlotEntitlementId"] = weaponInSlotEntitlementId
-    #                 weapon_slot["weaponInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
-    #                 weapon_slot["configSlotEntitlementId"] = configSlotEntitlementId
-    #                 weapon_slot["configSlotItemId"] = configSlotItemId
-
-    #                 append_to_json("inventory_slot.json", weapon_slot)
-    #             print("Weapons slot added to inventory_slot.json")
-
-    #         elif inventory == 2:
-    #             data = read_json_file("Payday3_offsets.json")
-    #             for _ in range(repeat_request_inventory):
-    #                 create_data_dictionary()
-    #                 mask_slot = data["Inventory"][2]["mask_slot"][0]
-    #                 mask_slot["maskInSlotEntitlementId"] = weaponInSlotEntitlementId
-    #                 mask_slot["maskInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
-    #                 mask_slot["configSlotEntitlementId"] = configSlotEntitlementId
-    #                 mask_slot["configSlotItemId"] = configSlotItemId
-
-    #                 append_to_json("inventory_slot.json", mask_slot)
-    #             print("Mask slot added to inventory_slot.json")
-    #         elif inventory == 3:
-    #             with open('Payday3_offsets.json', 'r') as json_file:
-    #                 data = json.load(json_file)
-    #             for _ in range(repeat_request_inventory):
-    #                 create_data_dictionary()
-    #                 suit_data = data["Inventory"][0]["suit"][0]
-    #                 suit_data["suitInSlotEntitlementId"] = weaponInSlotEntitlementId
-    #                 suit_data["suitInSlotAccelByteItemId"] = weaponInSlotAccelByteItemId
-    #                 suit_data["configSlotEntitlementId"] = configSlotEntitlementId
-    #                 suit_data["configSlotItemId"] = configSlotItemId
-
-    #                 append_to_json("inventory_slot.json", suit_data)
-    #             print("Suit slot added to inventory_slot.json")
-    #         elif inventory == 4:
-    #             with open('Payday3_offsets.json', 'r') as json_file:
-    #                 data = json.load(json_file)
-    #             for _ in range(repeat_request_inventory):
-    #                 create_data_dictionary()
-    #                 gloves_slot = data["Inventory"][3]["glove_slot"][0]
-    #                 gloves_slot["configSlotEntitlementId"] = configSlotEntitlementId
-    #                 gloves_slot["configSlotItemId"] = configSlotItemId
-
-    #                 append_to_json("inventory_slot.json", gloves_slot)
-    #             print("Gloves slot added to inventory_slot.json")
-    #     else:
-    #         print("Invalid Input")
-    #         continue
-
     elif choice == 4:
         item_id_json = read_json_file("Payday3_offsets.json")
-        suite = item_id_json["Suits"]
+        suite = item_id_json['Suits']
         suite_list = []
         counter = 1
         for suite_group in suite:
@@ -441,16 +313,16 @@ while True :
             suit_id = suit_added_inv[0]
             suite_details = suit_id[1]
             item_id = suite_details['id']
-            data["itemId"] = suit_id[1]["id"]
-            data["price"] = suit_id[1]["price"]
-            data["discountedPrice"] = suit_id[1]["price"]
-            data["currencyCode"] = "CASH"
+            data['itemId'] = suit_id[1]["id"]
+            data['price'] = suit_id[1]['price']
+            data['discountedPrice'] = suit_id[1]['price']
+            data['currencyCode'] = "CASH"
             response = requests.post(url, json=data, headers=headers)
             print(f"Item Bought Successfully - {newsuite_add[0]}")
     
     elif choice  == 5:
         item_id_json = read_json_file("Payday3_offsets.json")
-        weapon_paint = item_id_json["Weapon Paint Schemes"]
+        weapon_paint = item_id_json['Weapon Paint Schemes']
         weapon_paint_list = []
         counter = 1
         for weapon_paint_info in weapon_paint:
@@ -474,18 +346,18 @@ while True :
         for weapon_paint_add in weapon_paint_inv:
             paint_id = weapon_paint_inv[0]
             paint_details = paint_id[1]
-            item_id = paint_details["itemId"]
-            data["itemId"] = paint_id[1]["itemId"]
-            data["price"] = paint_id[1]["price"]
-            data["discountedPrice"] = paint_id[1]["price"]
-            data["currencyCode"] = paint_id[1]["currency"]
+            item_id = paint_details['itemId']
+            data['itemId'] = paint_id[1]['itemId']
+            data['price'] = paint_id[1]['price']
+            data['discountedPrice'] = paint_id[1]['price']
+            data['currencyCode'] = paint_id[1]['currency']
             response = requests.post(url, json=data, headers=headers)
-            print(response.content.decode('utf-8'))
+            #print(response.content.decode('utf-8'))
             print(f"Item Bought Successfully - {weapon_paint_add[0]}")
 
     elif choice == 6:
         item_id_json = read_json_file("Payday3_offsets.json")
-        inventory_slots = item_id_json["Inventory Slots"]
+        inventory_slots = item_id_json['Inventory Slots']
         inventory_slots_list = []
         counter = 1
         for inventory_slots_info in inventory_slots:
@@ -511,25 +383,25 @@ while True :
             for inventory_slots_add in inventory_slots_inv:
                 inventory_id = inventory_slots_inv[0]
                 inventory_details = inventory_id[1]
-                item_id = inventory_details["itemId"]
-                data["itemId"] = inventory_id[1]["itemId"]
-                data["price"] = inventory_id[1]["price"]
-                data["discountedPrice"] = inventory_id[1]["price"]
-                data["currencyCode"] = inventory_id[1]["currency"]
+                item_id = inventory_details['itemId']
+                data['itemId'] = inventory_id[1]['itemId']
+                data['price'] = inventory_id[1]['price']
+                data['discountedPrice'] = inventory_id[1]['price']
+                data['currencyCode'] = inventory_id[1]['currency']
                 response = requests.post(url, json=data, headers=headers)
                 print(f"Item Bought Successfully - {inventory_slots_add[0]} {_ + 1}")
 
     elif choice == 7:
         item_id_json = read_json_file("Payday3_offsets.json")
-        color_paint = item_id_json["Paint Schemes_All"]
+        color_paint = item_id_json['Paint Schemes_All']
         color_list = []
         counter = 1
         for color_group in color_paint:
             for color_alias, color_data in color_group.items():
                 for color_info in color_data:
-                    name = color_info["name"]
-                    itemId = color_info["itemId"]
-                    price = color_info["price"]
+                    name = color_info['name']
+                    itemId = color_info['itemId']
+                    price = color_info['price']
                     print(f"{counter}. {name}  : {price}$")
                     color_list.append((name, itemId, price))
                     counter += 1
@@ -551,10 +423,10 @@ while True :
                 for color_add in color_added_inv:
                     color_id = color_added_inv[0]
                     color_details = color_id[1]
-                    item_id = color_details["itemId"]
-                    data["itemId"] = color_id[1]['itemId']
-                    data["price"] = color_id[1]["price"]
-                    data["discountedPrice"] = color_id[1]["price"]
-                    data["currencyCode"] = color_id[1]["currency"]
+                    item_id = color_details
+                    data["itemId"] = color_id[1]
+                    data["price"] = color_id[2]
+                    data["discountedPrice"] = color_id[2]
+                    data["currencyCode"] = "CASH"
                     response = requests.post(url, json=data, headers=headers)
                     print(f"Item Purchased = {color_add[0]}")
