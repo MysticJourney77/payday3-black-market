@@ -8,7 +8,3 @@ Steps to use the Payday 3 Black Market:
 
 [Build on Replit](https://replit.com/github/MysticJourney77/payday3-black-market)
 
-
-Steps to use Add Free Inventory:
-
-Video : https://gofile.io/d/hz6Vfe
