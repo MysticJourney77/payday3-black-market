@@ -249,10 +249,6 @@ while True :
             selection = int(input("Enter the number of the item you want to select: "))
             if selection == 0:
                 break
-            elif 1 <= selection <= counter:
-                heist_add = heist_list[selection - 1]
-                heist_added_inv.append(heist_add)
-                print(f"Added {heist_add[0]} to cart")
             elif selection == 40:
                 repeat_request_heistfav_1 = int(input("Enter the total number of times you want the request to send: "))
                 for item_name, item_data in heist_list:
@@ -264,7 +260,11 @@ while True :
                         data['discountedPrice'] = price
                         data['currencyCode'] = "CASH"
                         response = requests.post(url, json=data, headers=headers)
-                    print(f"Item Purchased")
+                    print(f"Item Purchased {item_name}")
+            elif 1 <= selection <= counter:
+                heist_add = heist_list[selection - 1]
+                heist_added_inv.append(heist_add)
+                print(f"Added {heist_add[0]} to cart")
                         
             else:
                 print("Invalid selection. Please choose a valid number.")
