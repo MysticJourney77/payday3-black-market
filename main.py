@@ -261,6 +261,8 @@ while True :
                         data['currencyCode'] = "CASH"
                         response = requests.post(url, json=data, headers=headers)
                     print(f"Item Purchased {item_name}")
+                print("Enter 0 to Exit!")
+                break
             elif 1 <= selection <= counter:
                 heist_add = heist_list[selection - 1]
                 heist_added_inv.append(heist_add)
